@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bulean</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- HEADER SECTION -->
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          bulean
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" id="themeToggle">
+          Light / Dark
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <!-- HERO SECTION -->
+      <section id="hero">
+        <div class="hero-top">
+          <h1>
+            Leandro Busquets
+          </h1>
+          <div class="hero-links">
+            <a class="btn btn-outline" href="https://www.linkedin.com/in/leandro-busquets/" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn btn-outline" href="https://github.com/leanbusqts" target="_blank" rel="noopener">GitHub</a>
+          </div>
+        </div>
+        <h2>
+          Mobile &amp; AI Engineer
+        </h2>
+        <p>
+          Android (Kotlin) · iOS (Swift) · AI Tooling · Automation
+        </p>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about">
+        <h2>About</h2>
+        <p>
+          Electronics and Software Engineer with a background and interest in product development. 
+          I specialize in building native mobile solutions for Android (Kotlin) and iOS (Swift), 
+          applying clean architectures (Clean Architecture, MVVM) to ensure scalable and maintainable code. 
+          I have experience with Kotlin Multiplatform to share critical business logic across platforms.
+        </p>
+        <p>
+          I consider myself a proactive, analytical, and creative individual. 
+          I am passionate about innovation, 
+          which has led me to explore the potential of Artificial Intelligence (AI) for mobile teams, 
+          including the use of agents and process automation. 
+          I complement my technical skills with interests such as Design Thinking, Machine Learning, and 3D printing.
+        </p>
+      </section>
+
+      <!-- SKILLS SECTION -->
+      <section id="skills">
+        <h2>Skills</h2>
+        <div class="skills-grid">
+          <div class="card">
+            <h3>Mobile</h3>
+            <ul>
+              <li>
+                Android (Kotlin)
+              </li>
+              <li>
+                iOS (Swift)
+              </li>
+              <li>
+                Gradle, JaCoCo, LeakCanary, Bugsnag, Firebase, RUM (Datadog) and CI/CD custom
+              </li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Full Stack / AI &amp; Analytics</h3>
+            <ul>
+              <li>
+                Backend (Kotlin) &amp; Frontend (HTML + CCS + JS) - Ktor, Datadog, Kibana, Grafana, New Relic
+              </li>
+              <li>
+                AI - Prompt Engineering, RAG (Retrieval-Augmented Generation), Context Engineering, 
+                AGENTS.md and Spec Driven Development (SDD), Workflow Automation (n8n)
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- PROJECTS SECTION -->
+      <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="projects-grid">
+          <article class="card">
+            <div class="project-header">
+              <h3>eCoke</h3>
+              <span class="project-badge">Android</span>
+            </div>
+            <p>
+              Android Screen Awake app.
+            </p>
+          </article>
+          <article class="card">
+            <div class="project-header">
+              <h3>WhatsApp Scheduler</h3>
+              <span class="project-badge">Automation</span>
+            </div>
+            <p>
+              Android app that schedules messages.
+            </p>
+          </article>
+          <article class="card">
+            <div class="project-header">
+              <h3>WebGPT</h3>
+              <span class="project-badge">Plugin</span>
+            </div>
+            <p>
+              IntelliJ/Android Studio plugin that embeds ChatGPT Web.
+            </p>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER SECTION -->
+    <footer id="footer-contact">
+      <div class="footer-inner">
+        <p>
+          © <span id="currentYear"></span> bulean. All rights reserved.
+        </p>
+        <div class="footer-links">
+          <a href="https://www.linkedin.com/in/leandro-busquets/" target="_blank">LinkedIn</a>
+          <a href="https://github.com/leanbusqts" target="_blank">GitHub</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
