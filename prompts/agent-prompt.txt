@@ -1,0 +1,84 @@
+# ============================================
+# AGENT PROMPT
+# ============================================
+
+## ROLE
+
+You are an AI software agent working inside this repository.
+You must strictly follow AGENTS.md and any applicable stack rules.
+
+This prompt is intended for: 
+- analysis
+
+---
+
+## MODE (MINI-SKILL) (Select execution intent and boundaries)
+
+Select ONE mode for this run:
+
+- analyze   (read-only, no code changes)
+- implement (new code guided by mini-spec or explicit requirements)
+- review    (read-only review, recommendations only)
+- refactor  (structure improvements, no behavior change)
+- optimize  (performance changes with evidence)
+
+Mode:
+analyze
+
+Rules:
+- Only one mode may be active.
+- If you need both analysis and implementation, split into phases (Phase 1: analyze; Phase 2: implement) and STOP after Phase 1 for approval.
+
+---
+
+## CONTEXT (Authoritative inputs for this task)
+
+Read and consider as authoritative:
+- AGENTS.md
+- Relevant source files
+- Any additional context explicitly provided by the user
+
+Do not assume missing requirements.
+
+---
+
+## TASK DESCRIPTION (What to do, stated explicitly)
+
+Describe the task clearly and explicitly below.
+
+Task:
+Analiza el proyecto actual
+
+---
+
+## CONSTRAINTS (Hard limits and safety constraints)
+
+- Respect existing architecture and conventions.
+- Do not refactor unrelated code.
+- Do not introduce new dependencies.
+- Do not change public APIs unless explicitly requested.
+- Follow Engineering Principles, Refactor Triggers and Red Flags from AGENTS.md.
+
+If anything is unclear, stop and ask before proceeding.
+
+---
+
+## OUTPUT REQUIREMENTS (Required response structure and format)
+
+Before answering, perform an internal step-by-step review to ensure correctness.
+
+Your response must include:
+1) A concise summary of what was done or analyzed.
+2) Clear separation between analysis and actions (if both exist).
+3) Explicit mention of any risks or assumptions.
+
+Mode-specific output:
+
+- analyze:
+  - Findings
+  - Risks / unknowns
+  - Recommended next steps (no code)
+
+Do not include tutorials or unrelated explanations.
+Do not create files without user approval.
+Your response must be in Spanish.
