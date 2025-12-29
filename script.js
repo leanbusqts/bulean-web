@@ -1,46 +1,85 @@
-const body = document.body;
-const themeToggle = document.getElementById("themeToggle");
-const THEME_KEY = "bulean-theme";
+class ThemeController {
+  constructor({
+    toggleButton,
+    storageKey = "bulean-theme",
+    body = document.body,
+    storage = window.localStorage,
+  } = {}) {
+    this.toggleButton = toggleButton;
+    this.storageKey = storageKey;
+    this.body = body;
+    this.storage = storage;
+  }
 
-// Smooth scroll handler
-function registerSmoothScroll() {
-  const anchors = document.querySelectorAll('nav a[href^="#"]');
-  anchors.forEach((anchor) => {
-    anchor.addEventListener("click", (event) => {
-      event.preventDefault();
-      const sectionId = anchor.getAttribute("href");
-      document.querySelector(sectionId)?.scrollIntoView({ behavior: "smooth" });
+  init() {
+    this._applySavedTheme();
+    if (!this.toggleButton) {
+      return;
+    }
+
+    this.toggleButton.addEventListener("click", () => this.toggleTheme());
+  }
+
+  toggleTheme() {
+    const isLight = this.body.classList.toggle("theme-light");
+    this.storage.setItem(this.storageKey, isLight ? "light" : "dark");
+  }
+
+  _applySavedTheme() {
+    const savedTheme = this.storage.getItem(this.storageKey);
+    if (savedTheme === "light") {
+      this.body.classList.add("theme-light");
+      return;
+    }
+
+    this.body.classList.remove("theme-light");
+  }
+}
+
+class UIBehaviors {
+  constructor({
+    smoothScrollSelector = 'nav a[href^="#"]',
+    scrollOptions = { behavior: "smooth" },
+    yearSelector = "#currentYear",
+  } = {}) {
+    this.smoothScrollSelector = smoothScrollSelector;
+    this.scrollOptions = scrollOptions;
+    this.yearSelector = yearSelector;
+  }
+
+  init() {
+    this.registerSmoothScroll();
+    this.setCurrentYear();
+  }
+
+  registerSmoothScroll() {
+    const anchors = document.querySelectorAll(this.smoothScrollSelector);
+    anchors.forEach((anchor) => {
+      anchor.addEventListener("click", (event) => {
+        event.preventDefault();
+        const sectionId = anchor.getAttribute("href");
+        if (!sectionId) {
+          return;
+        }
+
+        document.querySelector(sectionId)?.scrollIntoView(this.scrollOptions);
+      });
     });
-  });
-}
+  }
 
-// Theme management
-function initializeTheme() {
-  const savedTheme = localStorage.getItem(THEME_KEY);
-  if (savedTheme === "light") {
-    body.classList.add("theme-light");
-  } else {
-    body.classList.remove("theme-light");
+  setCurrentYear() {
+    const yearElement = document.querySelector(this.yearSelector);
+    if (yearElement) {
+      yearElement.textContent = new Date().getFullYear();
+    }
   }
 }
 
-function toggleTheme() {
-  const isLight = body.classList.toggle("theme-light");
-  localStorage.setItem(THEME_KEY, isLight ? "light" : "dark");
-}
-
-// Render resource columns dynamically
-function setCurrentYear() {
-  const yearElement = document.getElementById("currentYear");
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-}
-
-registerSmoothScroll();
-initializeTheme();
-setCurrentYear();
-
-themeToggle.addEventListener("click", () => {
-  toggleTheme();
+const themeController = new ThemeController({
+  toggleButton: document.getElementById("themeToggle"),
 });
+
+const uiBehaviors = new UIBehaviors();
+
+themeController.init();
+uiBehaviors.init();

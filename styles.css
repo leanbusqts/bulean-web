@@ -9,6 +9,9 @@
   --accent-muted: rgba(122, 180, 255, 0.12);
   --border: rgba(255, 255, 255, 0.08);
   --shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+  --section-spacing: 70px;
+  --grid-gap: 24px;
+  --grid-gap-mobile: 16px;
 }
 
 /* Variables para el tema claro */
@@ -134,10 +137,13 @@ p {
 }
 
 section {
-  margin-bottom: 70px;
   scroll-margin-top: 80px;
   position: relative;
   z-index: 1;
+}
+
+.section-spacing {
+  margin-bottom: var(--section-spacing);
 }
 
 #links {
@@ -232,7 +238,10 @@ body:not(.theme-light) .card:hover {
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+}
+
+.grid-gap {
+  gap: var(--grid-gap);
 }
 
 .skills-grid h3 {
@@ -255,7 +264,6 @@ body:not(.theme-light) .card:hover {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
 }
 
 .projects-grid .card {
@@ -373,6 +381,10 @@ footer {
     scroll-margin-top: 160px;
   }
 
+  .grid-gap {
+    gap: var(--grid-gap-mobile);
+  }
+
   h1 {
     font-size: clamp(2rem, 10vw, 3.1rem);
   }
@@ -383,7 +395,6 @@ footer {
 
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 
   .projects-grid .card {
