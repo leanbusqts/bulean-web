@@ -83,3 +83,7 @@ const uiBehaviors = new UIBehaviors();
 
 themeController.init();
 uiBehaviors.init();
+
+if (typeof module !== "undefined" && module.exports) {
+  module.exports = { ThemeController, UIBehaviors };
+}

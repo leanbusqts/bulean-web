@@ -1,0 +1,16 @@
+{
+  "name": "bulean-web",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test:unit": "jest",
+    "test:e2e": "playwright test",
+    "test": "npm run test:unit && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.45.0",
+    "jest": "^29.6.0",
+    "jest-environment-jsdom": "^29.6.0"
+  }
+}
