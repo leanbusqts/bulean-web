@@ -1,8 +1,10 @@
 const {
   ThemeController,
   UIBehaviors,
+  ToastController,
   AnalyticsTracker,
   registerExternalLinkTracking,
+  registerProjectInteractions,
 } = require("../../script.js");
 
 describe("ThemeController", () => {
@@ -149,6 +151,60 @@ describe("registerExternalLinkTracking", () => {
       platform: "github",
       area: "hero",
       url: "https://github.com/test",
+    });
+  });
+});
+
+describe("registerProjectInteractions", () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+    document.body.innerHTML = `
+      <div class="projects-grid">
+        <a class="project-card-link" href="https://play.google.com/store/apps/details?id=test" data-project-name="TestApp">App</a>
+        <article class="project-card-action" data-project-name="WhatsApp Scheduler" data-action="work-in-progress">
+          <p>work in progress</p>
+        </article>
+      </div>
+      <div id="toast"></div>
+    `;
+  });
+
+  afterEach(() => {
+    AnalyticsTracker.reset();
+    jest.useRealTimers();
+  });
+
+  test("envía tracking al hacer click en cards con link", () => {
+    const { logEvent } = createFirebaseMock();
+    const toastController = new ToastController({ element: document.getElementById("toast") });
+
+    registerProjectInteractions(toastController);
+
+    document
+      .querySelector(".project-card-link")
+      .dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    expect(logEvent).toHaveBeenCalledWith("project_link_click", {
+      project: "TestApp",
+      url: "https://play.google.com/store/apps/details?id=test",
+    });
+  });
+
+  test("muestra toast y envía tracking en card de work in progress", () => {
+    const { logEvent } = createFirebaseMock();
+    const toastElement = document.getElementById("toast");
+    const toastController = new ToastController({ element: toastElement });
+
+    registerProjectInteractions(toastController);
+
+    document
+      .querySelector(".project-card-action")
+      .dispatchEvent(new MouseEvent("click", { bubbles: true }));
+
+    expect(toastElement.classList.contains("toast-visible")).toBe(true);
+    expect(logEvent).toHaveBeenCalledWith("project_action_click", {
+      project: "WhatsApp Scheduler",
+      action: "work-in-progress",
     });
   });
 });

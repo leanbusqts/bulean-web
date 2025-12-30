@@ -273,6 +273,20 @@ body:not(.theme-light) .card:hover {
   min-height: 220px;
 }
 
+.project-card {
+  text-decoration: none;
+  color: var(--text);
+}
+
+.project-card-action {
+  cursor: pointer;
+}
+
+.project-card-action:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
 .projects-grid .card h3 {
   margin: 0;
   font-size: 1.4rem;
@@ -331,6 +345,29 @@ footer {
 
 .footer-links a:hover {
   color: var(--accent);
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%) translateY(16px);
+  background-color: var(--bg-card);
+  color: var(--text);
+  padding: 12px 16px;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s ease,
+    color 0.3s ease, border-color 0.3s ease;
+  z-index: 1100;
+}
+
+.toast.toast-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* Responsividad específica para pantallas pequeñas */

@@ -124,7 +124,7 @@
       <section id="projects" class="section-spacing" aria-labelledby="projects-heading">
         <h2 id="projects-heading">Featured Projects</h2>
         <div class="projects-grid grid-gap">
-          <article class="card">
+          <a class="card project-card project-card-link" href="https://play.google.com/store/apps/details?id=com.bulean.coka" target="_blank" rel="noopener" data-project-name="eCoke">
             <div class="project-header">
               <h3>eCoke</h3>
               <span class="project-badge">Android</span>
@@ -132,8 +132,8 @@
             <p>
               Android Screen Awake app.
             </p>
-          </article>
-          <article class="card">
+          </a>
+          <article class="card project-card project-card-action" data-project-name="WhatsApp Scheduler" data-action="work-in-progress" tabindex="0" role="button" aria-label="WhatsApp Scheduler work in progress">
             <div class="project-header">
               <h3>WhatsApp Scheduler</h3>
               <span class="project-badge">Automation</span>
@@ -142,7 +142,16 @@
               Android app that schedules messages.
             </p>
           </article>
-          <article class="card">
+          <a class="card project-card project-card-link" href="https://play.google.com/store/apps/details?id=dev.bulean.tridictir" target="_blank" rel="noopener" data-project-name="Tridictir">
+            <div class="project-header">
+              <h3>Tridictir</h3>
+              <span class="project-badge">Android</span>
+            </div>
+            <p>
+              Android project available on Google Play.
+            </p>
+          </a>
+          <a class="card project-card project-card-link" href="https://github.com/leanbusqts/WebGPT" target="_blank" rel="noopener" data-project-name="WebGPT">
             <div class="project-header">
               <h3>WebGPT</h3>
               <span class="project-badge">Plugin</span>
@@ -150,7 +159,7 @@
             <p>
               IntelliJ/Android Studio plugin that embeds ChatGPT Web.
             </p>
-          </article>
+          </a>
         </div>
       </section>
 
@@ -163,11 +172,16 @@
           © <span id="currentYear"></span> bulean. All rights reserved.
         </p>
         <div class="footer-links">
+          <a href="https://play.google.com/store/apps/developer?id=bulean&pli=1" target="_blank">Google Play</a>
           <a href="https://www.linkedin.com/in/leandro-busquets/" target="_blank">LinkedIn</a>
           <a href="https://github.com/leanbusqts" target="_blank">GitHub</a>
         </div>
       </div>
     </footer>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      work in progress
+    </div>
 
     <script src="script.js"></script>
   </body>

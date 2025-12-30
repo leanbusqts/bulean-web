@@ -110,22 +110,67 @@ class UIBehaviors {
   }
 }
 
+class ToastController {
+  constructor({
+    element,
+    visibleClass = "toast-visible",
+    duration = 2600,
+  } = {}) {
+    this.element = element;
+    this.visibleClass = visibleClass;
+    this.duration = duration;
+    this.hideTimeout = null;
+  }
+
+  show(message) {
+    if (!this.element) {
+      return;
+    }
+
+    if (this.hideTimeout) {
+      clearTimeout(this.hideTimeout);
+    }
+
+    if (message) {
+      this.element.textContent = message;
+    }
+
+    this.element.classList.add(this.visibleClass);
+    this.hideTimeout = window.setTimeout(() => this.hide(), this.duration);
+  }
+
+  hide() {
+    if (!this.element) {
+      return;
+    }
+
+    this.element.classList.remove(this.visibleClass);
+    this.hideTimeout = null;
+  }
+}
+
 const themeController = new ThemeController({
   toggleButton: document.getElementById("themeToggle"),
 });
 
 const uiBehaviors = new UIBehaviors();
+const toastController = new ToastController({
+  element: document.getElementById("toast"),
+});
 
 themeController.init();
 uiBehaviors.init();
 registerExternalLinkTracking();
+registerProjectInteractions(toastController);
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = {
     ThemeController,
     UIBehaviors,
+    ToastController,
     AnalyticsTracker,
     registerExternalLinkTracking,
+    registerProjectInteractions,
   };
 }
 
@@ -151,6 +196,21 @@ function registerExternalLinkTracking() {
       platform: "github",
       area: "footer",
     },
+    {
+      selector: ".footer-links a[href*='play.google.com']",
+      platform: "google_play",
+      area: "footer",
+    },
+    {
+      selector: ".project-card-link[href*='play.google.com']",
+      platform: "google_play",
+      area: "projects",
+    },
+    {
+      selector: ".project-card-link[href*='github.com']",
+      platform: "github",
+      area: "projects",
+    },
   ];
 
   linkConfigs.forEach(({ selector, platform, area }) => {
@@ -162,6 +222,42 @@ function registerExternalLinkTracking() {
           url: link.href,
         });
       });
+    });
+  });
+}
+
+function registerProjectInteractions(toastController) {
+  document.querySelectorAll(".project-card-link").forEach((card) => {
+    const projectName = card.dataset.projectName || "unknown";
+    card.addEventListener("click", () => {
+      AnalyticsTracker.logEvent("project_link_click", {
+        project: projectName,
+        url: card.href,
+      });
+    });
+  });
+
+  document.querySelectorAll(".project-card-action").forEach((card) => {
+    const projectName = card.dataset.projectName || "unknown";
+    const action = card.dataset.action || "action";
+    const message = card.dataset.toastMessage || "work in progress";
+
+    const handleAction = () => {
+      if (toastController) {
+        toastController.show(message);
+      }
+      AnalyticsTracker.logEvent("project_action_click", {
+        project: projectName,
+        action,
+      });
+    };
+
+    card.addEventListener("click", handleAction);
+    card.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        handleAction();
+      }
     });
   });
 }
