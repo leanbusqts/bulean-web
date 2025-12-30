@@ -5,6 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>bulean</title>
     <link rel="stylesheet" href="styles.css" />
+    <!-- Firebase SDKs (Compat) -->
+    <script defer src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+    <script defer>
+      document.addEventListener("DOMContentLoaded", () => {
+        if (!window.firebase) {
+          return;
+        }
+
+        const firebaseConfig = {
+          apiKey: "AIzaSyDOdkALfUbnZvtea7ATegR3IEJUik1UMK0",
+          authDomain: "buleandev-4102b.firebaseapp.com",
+          projectId: "buleandev-4102b",
+          storageBucket: "buleandev-4102b.appspot.com",
+          messagingSenderId: "934770823124",
+          appId: "1:934770823124:web:4cf8d19a973cb206569041",
+          measurementId: "G-T1ZMVGMECG",
+        };
+
+        const app = firebase.initializeApp(firebaseConfig);
+        firebase.analytics(app);
+      });
+    </script>
   </head>
   <body>
     <!-- HEADER SECTION -->
