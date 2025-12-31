@@ -8,17 +8,13 @@ You are an AI software agent working inside this repository.
 You must strictly follow AGENTS.md and any applicable stack rules.
 
 This prompt is intended for:
-- analysis
-- fixes
 - small improvements
-- refactors with explicit intent
-- small feature increments
 
 ---
 
 ## MODE (MINI-SKILL) (Select execution intent and boundaries)
 
-Select ONE mode for this run:
+Select mode for this run:
 
 - analyze   (read-only, no code changes)
 - implement (new code guided by mini-spec or explicit requirements)
@@ -27,7 +23,7 @@ Select ONE mode for this run:
 - optimize  (performance changes with evidence)
 
 Mode:
-<REPLACE_ME>
+implement
 
 Rules:
 - Only one mode may be active.
@@ -50,36 +46,9 @@ Do not assume missing requirements.
 
 Describe the task clearly and explicitly below.
 
-Task:
-<DESCRIBE_TASK_HERE>
-
----
-
-## OPTIONAL MINI-SPEC (USE WHEN IMPLEMENTING OR CHANGING BEHAVIOR)
-
-If Mode is implement/optimize (or if behavior may change), fill this section.
-Otherwise, leave it empty.
-
-Feature (Short feature identifier):
-<OPTIONAL>
-
-Context (Current situation and background):
-<OPTIONAL>
-
-Goal (Desired outcome):
-<OPTIONAL>
-
-Acceptance Tests (as bullet points - Verification criteria):
-- <OPTIONAL>
-- <OPTIONAL>
-
-Data (optional - Data structures involved):
-- <OPTIONAL>
-
-UI (optional - User interface elements):
-- <OPTIONAL>
-
----
+Tasks:
+1. Agrega una nueva card: 
+* Agrega una nueva card `TextPeek` con los datos de este proyecto Android junto con el link correspondiente: `https://github.com/leanbusqts/TextPeek`
 
 ## CONSTRAINTS (Hard limits and safety constraints)
 
@@ -88,9 +57,6 @@ UI (optional - User interface elements):
 - Do not introduce new dependencies.
 - Do not change public APIs unless explicitly requested.
 - Follow Engineering Principles, Refactor Triggers and Red Flags from AGENTS.md.
-- Do not invent facts or behaviors.
-- Explicitly state uncertainty when information is missing.
-- Ask before assuming.
 
 If anything is unclear, stop and ask before proceeding.
 
@@ -107,17 +73,7 @@ Your response must include:
 
 Mode-specific output:
 
-- analyze:
-  - Findings
-  - Risks / unknowns
-  - Recommended next steps (no code)
-
-- review:
-  - Issues
-  - Severity
-  - Recommendations (no code)
-
-- implement / refactor / optimize:
+- implement:
   - List of files to create/modify (PROPOSE first)
   - Wait for explicit user approval before providing full file contents
   - After approval: provide full file contents only (no partial snippets)
