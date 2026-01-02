@@ -260,12 +260,13 @@ body:not(.theme-light) .card:hover {
   margin-bottom: 10px;
 }
 
-/* Grid de proyectos destacados */
+/* Grid de proyectos destacados (desktop) */
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
 
+/* Estilos de card que se mantienen solo en desktop */
 .projects-grid .card {
   padding: 24px;
   border-radius: 22px;
@@ -370,7 +371,7 @@ footer {
   transform: translateX(-50%) translateY(0);
 }
 
-/* Responsividad específica para pantallas pequeñas */
+/* Responsividad específica para pantallas pequeñas (ajusta el breakpoint aquí) */
 @media (max-width: 720px) {
   body {
     font-size: 0.9rem;
@@ -430,12 +431,63 @@ footer {
     font-size: clamp(1.4rem, 7vw, 1.9rem);
   }
 
+  /* En mobile mostramos los proyectos como lista para evitar cards demasiado grandes */
   .projects-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Ajusta el espaciado vertical entre ítems de la lista móvil */
   }
 
   .projects-grid .card {
-    padding: 8px;
+    background-color: var(--bg-card); /* Ligero fondo para mantener sensación de card */
+    border: 1px solid var(--border);
+    border-radius: 10px; /* Bordes sutiles para no perder del todo el look de card */
+    box-shadow: none;
+    padding: 14px 12px; /* Ajusta el padding vertical de cada ítem */
+    min-height: 120px; /* Altura mínima/fija para que todas las filas midan igual en mobile */
+    max-height: 120px; /* Ajusta aquí si prefieres más altura */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    overflow: hidden; /* Evita que el contenido expanda la altura fija */
+  }
+
+  .project-card {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    column-gap: 12px;
+    row-gap: 6px;
+    align-items: center;
+    height: 100%;
+  }
+
+  .project-header {
+    align-items: center;
+  }
+
+  .projects-grid .card h3 {
+    margin: 0;
+    font-size: 1.05rem; /* Ajusta el tamaño del título en la lista móvil */
+  }
+
+  .project-card p {
+    margin: 0;
+    grid-column: 1 / 2;
+    font-size: 0.9rem; /* Ajusta el tamaño del texto descriptivo */
+    display: -webkit-box; /* Limita líneas para sostener altura fija */
+    -webkit-line-clamp: 2; /* Ajusta el número de líneas visibles */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-badge {
+    margin-left: auto;
+    padding: 4px 10px;
+    font-size: 0.72rem;
+  }
+
+  .project-card:hover,
+  .project-card:active {
+    background-color: rgba(255, 255, 255, 0.03); /* Sutileza al interactuar en mobile */
+    border-color: var(--accent-muted);
   }
 
   .footer-inner {
